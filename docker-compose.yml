@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # FastAPI Backend
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - DEBUG=true
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+      - ollama
+
+  # PostgreSQL Database (Optional)
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=developer
+      - POSTGRES_PASSWORD=developer
+      - POSTGRES_DB=ai_reviews
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Local LLM (Optional)
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+
+volumes:
+  postgres_data:

@@ -1,0 +1,136 @@
+{
+  "name": "ai-code-reviewer",
+  "displayName": "AI Code Reviewer",
+  "description": "Real-time AI-powered code analysis and suggestions in VS Code",
+  "version": "1.0.0",
+  "publisher": "developer",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Programming Languages", "Linters", "Other"],
+  "keywords": ["ai", "code-review", "suggestions", "debugging", "refactoring"],
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ai-code-reviewer"
+  },
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ai-reviewer.analyze",
+        "title": "AI: Analyze Code",
+        "category": "AI Code Reviewer"
+      },
+      {
+        "command": "ai-reviewer.explain",
+        "title": "AI: Explain Code",
+        "category": "AI Code Reviewer"
+      },
+      {
+        "command": "ai-reviewer.improve",
+        "title": "AI: Improve Code",
+        "category": "AI Code Reviewer"
+      },
+      {
+        "command": "ai-reviewer.fix",
+        "title": "AI: Fix Issues",
+        "category": "AI Code Reviewer"
+      },
+      {
+        "command": "ai-reviewer.settings",
+        "title": "AI: Settings",
+        "category": "AI Code Reviewer"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ai-reviewer.analyze",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "ai-reviewer.improve",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "ai-reviewer.analyze",
+          "group": "1_modification",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "ai-reviewer.improve",
+          "group": "1_modification",
+          "when": "editorTextFocus"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI Code Reviewer",
+      "properties": {
+        "ai-reviewer.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:8000",
+          "description": "Backend API URL"
+        },
+        "ai-reviewer.apiKey": {
+          "type": "string",
+          "description": "API key for authentication"
+        },
+        "ai-reviewer.model": {
+          "type": "string",
+          "enum": ["gpt-4", "gpt-3.5-turbo", "claude-3", "local"],
+          "default": "gpt-4",
+          "description": "LLM model to use"
+        },
+        "ai-reviewer.enableRAG": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable context-aware analysis (RAG)"
+        },
+        "ai-reviewer.enableAST": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable static analysis (AST)"
+        },
+        "ai-reviewer.autoAnalyze": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically analyze on save"
+        },
+        "ai-reviewer.showSeverity": {
+          "type": "array",
+          "items": {"type": "string", "enum": ["BLOCKER", "WARN", "INFO"]},
+          "default": ["BLOCKER", "WARN"],
+          "description": "Show only these severity levels"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "lint": "eslint src --ext .ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "axios": "^1.5.0"
+  }
+}
