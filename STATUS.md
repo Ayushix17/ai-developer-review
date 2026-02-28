@@ -80,10 +80,11 @@ Then visit: **http://localhost:8000/docs**
 - ✅ Cost tracking per request
 - ✅ Interactive Swagger UI
 - ✅ Docker setup
+- ✅ Inline PR comments – webhook triggers analyze & posts review
 
 ### Framework Ready (Needs Phase Setup)
 - ⏳ GitHub integration (webhook handler ready)
-- ⏳ RAG pipeline (code skeleton ready)
+- ✅ RAG pipeline with embeddings & retrieval
 - ⏳ PR inline comments (GitHub API ready)
 - ⏳ VS Code extension (scaffolding complete)
 

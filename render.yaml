@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: ai-reviewer-backend
+    env: python
+    region: oregon
+    plan: standard
+    numInstances: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: LLM_PROVIDER
+        value: openai
+      - key: PHASE_3_RAG_ENABLED
+        value: "true"
+      - key: PHASE_5_PR_COMMENTS_ENABLED
+        value: "true"
+      - key: PHASE_7_EXTENSION_ENABLED
+        value: "true"
+      - key: PHASE_8_FEEDBACK_ENABLED
+        value: "true"
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    healthCheckPath: /health
+    routes:
+      - path: /
+        matchType: prefix
+        destination: /health

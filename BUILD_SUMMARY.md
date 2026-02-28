@@ -248,7 +248,7 @@ This Week:
   → Live PR reviewer! 🎉
 
 Next Week:
-  1. Add RAG pipeline (Phase 3, 2-3 hrs)
+  1. Expand RAG pipeline (already implemented) or tune settings
   2. Post PR comments (Phase 5, 2-3 hrs)
   3. Build VS Code extension (Phase 7, 4-6 hrs)
   → Full system ready! 🏆

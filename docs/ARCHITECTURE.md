@@ -189,6 +189,38 @@ This AI-powered developer productivity tool combines multiple technologies to pr
 - Real-time monitoring
 - Advanced caching
 
+## Phase 9: Multi-Agent Orchestration (Enterprise)
+
+Phase 9 introduces a distributed multi-agent architecture where specialized
+agents collaborate to enhance review quality, optimize code, and enforce
+operational constraints.  The orchestrator (see `app/multi_agent/orchestrator.py`)
+serves as the central coordinator, dispatching tasks and aggregating results.
+
+### Agent Roles
+
+- **Reviewer Agent** – produces initial code reviews combining LLM+AST+RAG
+- **Critic Agent** – evaluates reviewer output for false positives or gaps
+- **Optimizer Agent** – suggests performance improvements or refactorings
+- **CostGuard Agent** – monitors token usage, triggers model fallback
+- **FeedbackCollector Agent** – ingests Phase 8 feedback to retrain models
+
+Agents communicate over a lightweight message bus (for MVP, in-memory; later
+Redis/Kafka).  This architecture supports horizontal scaling and easy
+integration of new capabilities (e.g. security scanner, test generator).
+
+A simplified data flow for Phase 9:
+
+```
+Client submits task → Orchestrator → Reviewer → Critic → Optimizer
+                                ↑            ↓
+                         CostGuard monitors usage
+                                ↓
+                       FeedbackCollector updates models
+```
+
+Phase 9 is optional and intended for enterprise deployments.  It provides a
+framework for future expansion beyond simple LLM analysis.
+
 ## Security
 
 - GitHub OAuth for authentication

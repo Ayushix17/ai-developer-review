@@ -23,11 +23,20 @@ Transform code review workflows by combining:
 - ✅ Inline PR comments with severity labels
 - ✅ Cost & latency tracking
 
+### Phase 6: Cost Tracking
+- ✅ Track tokens per request
+- ✅ Budget enforcement
+
 ### Phase 7: VS Code Extension
 - ✅ Authentication & backend connection
 - ✅ Send selected code for analysis
 - ✅ Display suggestions inline
 - ✅ Quick actions (Explain / Improve / Fix)
+
+### Phase 8: Evaluation & Feedback
+- ✅ `/feedback` endpoint
+- ✅ In-memory feedback store
+- ✅ Metrics for helpfulness/accuracy
 
 ### Phase 9: Enterprise Multi-Agent System
 - ✅ Reviewer agent (code quality)
@@ -76,19 +85,20 @@ npm run compile
 ## 📋 Deployment Checklist
 
 ### Minimum (Strong for Jobs) — Phases 0-5
-- [ ] Phase 0: Planning & architecture
-- [ ] Phase 1: FastAPI backend + Docker
-- [ ] Phase 2: GitHub OAuth + webhooks
-- [ ] Phase 3: RAG embeddings pipeline
-- [ ] Phase 4: AST static analysis
-- [ ] Phase 5: Inline PR comments
+- [x] Phase 0: Planning & architecture
+- [x] Phase 1: FastAPI backend + Docker
+- [x] Phase 2: GitHub OAuth + webhooks
+- [x] Phase 3: RAG embeddings pipeline
+- [x] Phase 4: AST static analysis
+- [x] Phase 5: Inline PR comments
 
 **Result**: Fully functional AI PR reviewer ready for GitHub integration
 
 ### Ideal (Top 5%) — Phases 0-7
-- [ ] All phases 0-5
-- [ ] Phase 6: Cost & latency tracking
-- [ ] Phase 7: VS Code extension
+- [x] All phases 0-5
+- [x] Phase 6: Cost & latency tracking
+- [x] Phase 7: VS Code extension
+- [x] Phase 8: Evaluation & feedback loop
 
 **Result**: Production-ready tool with developer integration
 

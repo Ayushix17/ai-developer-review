@@ -149,12 +149,12 @@ http://localhost:8000/docs
 | 0 | Planning | ✅ Done |
 | 1 | FastAPI Backend | ✅ Scaffolded |
 | 2 | GitHub Integration | ⏳ Next |
-| 3 | RAG Pipeline | ⏳ Planned |
+| 3 | RAG Pipeline | ✅ Implemented |
 | 4 | AST Analysis | ✅ Implemented |
-| 5 | PR Comments | ⏳ Planned |
+| 5 | PR Comments | ✅ Implemented |
 | 6 | Cost Tracking | ✅ Implemented |
-| 7 | VS Code Extension | ✅ Scaffolded |
-| 8 | Evaluation Loop | ⏳ Planned |
+| 7 | VS Code Extension | ✅ Implemented |
+| 8 | Evaluation Loop | ✅ Implemented |
 | 9 | Multi-Agent | ⏳ Optional |
 
 ## 📚 Read These First

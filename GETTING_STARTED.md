@@ -214,12 +214,22 @@ curl -X POST http://localhost:8000/analyze \
 **Do this when ready**: Add GitHub token to `.env` and setup webhook in GitHub settings
 
 ### Phase 3: RAG Pipeline (2-3 hours)
-- Embed repository files
-- Retrieve relevant context
-- Inject into LLM prompt
-- Reduce hallucination
+- Embed repository files into vector database (FAISS/Chroma)
+- Retrieve relevant code/context for each PR or diff
+- Inject relevant context into LLM prompts
+- Reduce hallucination and improve review accuracy
 
-**Do this when ready**: Install sentence-transformers, setup FAISS
+**Prerequisite**: make sure packages are installed (see `backend/requirements.txt` includes `sentence-transformers`, `faiss-cpu`, `chromadb`).
+
+**Setup steps**:
+1. Set `ENABLE_PHASE_3_RAG=true` in `backend/.env` (already defaulted).
+2. Start backend and hit `POST /rag/refresh` to build embeddings from repo files.
+3. Optionally run `curl http://localhost:8000/rag/refresh` or use API docs.
+4. In analysis requests include `"include_rag": true` (default) and provide `repository_context`.
+
+**Verification**: make an analysis request and inspect logs – RAG retriever should log loaded model and embeddings.  If retrieval fails the full repo context is used.
+
+**Troubleshooting**: If the service logs "sentence-transformers not installed" or "FAISS not installed", install dependencies then restart.
 
 ### Phase 4: AST Analysis ✅ READY
 - Python AST parsing
@@ -228,6 +238,13 @@ curl -X POST http://localhost:8000/analyze \
 - No LLM cost
 
 **Already implemented**: See `app/ast_analyzer/parser.py`
+
+### Phase 5: Inline Comments (2-3 hours)
+- Run analysis on PRs and post GitHub review comments
+- Summarize issues with severity labels
+- Group duplicates and attach suggestions
+
+**Do this after Phase 2**: Webhook now triggers full analysis automatically.  Set `GITHUB_TOKEN` in `.env`, enable `ENABLE_PHASE_5_PR_COMMENTS=true`, and make sure `handle_pr_event` is being called.  The system will reply to opened/synchronized PRs.
 
 ### Phase 5: Inline Comments (2-3 hours)
 - Post review comments on GitHub
@@ -252,9 +269,11 @@ curl -X POST http://localhost:8000/analyze \
 **Start when ready**: `cd vscode-extension && npm install`
 
 ### Phase 8: Evaluation & Feedback (2-3 hours)
-- Collect user feedback
-- Track accuracy
-- Generate reports
+- Collect user feedback via `/feedback` endpoint
+- Track accuracy, helpfulness, false positives
+- Generate basic reports from feedback
+
+**How to use**: Post JSON to `/feedback` or integrate UI in frontend; feedback is stored in memory for now and viewable via `get_feedback_store()`.
 
 **Phase 9**: Multi-agent system (optional, enterprise)
 

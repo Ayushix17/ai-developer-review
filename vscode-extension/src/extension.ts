@@ -4,6 +4,8 @@ Phase 7: Scaffold extension, authenticate, send code to backend, show suggestion
 """
 
 import * as vscode from 'vscode';
+import { analyzeCode, improveCode, explainCode } from './client';
+import { requestApiKey, requestGitHubToken } from './auth';
 
 export async function activate(context: vscode.ExtensionContext) {
     console.log('AI Code Reviewer extension activated');
@@ -76,25 +78,3 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(statusBar);
 }
 
-export function deactivate() {
-    console.log('AI Code Reviewer extension deactivated');
-}
-
-async function analyzeCode(code: string) {
-    // Implementation will connect to backend
-    return [];
-}
-
-async function improveCode(code: string) {
-    // Implementation will connect to backend
-    return [];
-}
-
-async function explainCode(code: string): Promise<string> {
-    // Implementation will connect to backend
-    return '';
-}
-
-function showSuggestions(suggestions: any[]) {
-    // Show suggestions in UI
-}

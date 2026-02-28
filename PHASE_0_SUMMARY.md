@@ -319,7 +319,7 @@ Complete All Phases
 
 ### Long Term (2-3 Weeks)
 - [ ] Build VS Code extension (Phase 7)
-- [ ] Collect feedback & metrics (Phase 8)
+- ✅ Collect feedback & metrics (Phase 8)
 - [ ] Multi-agent system (Phase 9) - optional
 
 ---

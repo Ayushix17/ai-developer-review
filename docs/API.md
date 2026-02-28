@@ -153,6 +153,63 @@ GitHub sends standard PR event payload. Backend automatically:
 
 ---
 
+### RAG Refresh (Phase 3)
+
+```http
+POST /rag/refresh
+``` 
+
+Rebuild embeddings for the repository. This scans files under the `$REPOSITORY_ROOT` (defaults to working directory) and creates or updates the FAISS/Chroma index. Call this after you add new files or update environment variables.
+
+**Response:**
+```json
+{
+  "status": "ok",
+  "message": "RAG embeddings refreshed"
+}
+```
+
+---
+
+### Feedback (Phase 8)
+
+```http
+POST /feedback
+Content-Type: application/json
+```
+
+Collect user feedback on reviews. Useful for evaluation and tuning.
+
+**Request:**
+```json
+{
+  "pr_number": 123,
+  "file_name": "foo.py",
+  "comments": "The suggestion was helpful",
+  "rating": 5
+}
+```
+
+**Response:**
+```json
+{ "status": "ok" }
+```
+
+---
+
+### GitHub Webhook
+
+```http
+POST /webhook/github
+Content-Type: application/json
+X-GitHub-Event: pull_request
+X-Hub-Signature: sha256=...
+```
+}
+```
+
+---
+
 ### Metrics
 
 ```http
