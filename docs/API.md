@@ -1,20 +1,19 @@
 # API
 
-## Base URL
+## Base URLs
 
-```text
-http://localhost:8000
-```
+- Local backend: `http://localhost:8000`
+- Vercel production backend: `/api`
 
 ## `GET /health`
 
 ```json
-{
-  "status": "ok"
-}
+{ "status": "ok" }
 ```
 
 ## `POST /analyze`
+
+Request:
 
 ```json
 {
@@ -22,6 +21,19 @@ http://localhost:8000
   "language": "python",
   "source_type": "pasted_code",
   "context": "Use production-safe logging"
+}
+```
+
+Response:
+
+```json
+{
+  "analysis_id": 12,
+  "summary": "Found 2 issue(s): 1 static, 1 AI.",
+  "findings": [],
+  "tokens_used": 180,
+  "latency_ms": 950,
+  "cost_usd": 0.0018
 }
 ```
 

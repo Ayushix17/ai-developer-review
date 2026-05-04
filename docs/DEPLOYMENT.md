@@ -9,37 +9,30 @@ cd backend
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --port 8000
 ```
 
 ### Frontend
 
 ```bash
-pip install -r requirements.txt
-streamlit run frontend/streamlit_app.py
+cd frontend
+npm install
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000 npm run dev
 ```
 
-## Docker
+## Vercel
 
-```bash
-docker compose up --build
-```
+The repo is configured as a Vercel Services project with:
 
-Backend: `http://localhost:8000`
-Frontend: `http://localhost:8501`
+- `frontend/` as the web service
+- `backend/main.py` as the API service
+- `routePrefix: "/api"` for the backend
 
-## Render
+Required environment variables:
 
-The repo includes a `render.yaml` blueprint that creates:
-
-- a FastAPI backend service
-- a Streamlit frontend service
-- a managed PostgreSQL database
-
-Set these environment variables during blueprint creation:
-
+- `DATABASE_URL`
 - `OPENAI_API_KEY`
-- `GITHUB_TOKEN` if you want GitHub PR ingestion
-- `GITHUB_WEBHOOK_SECRET` if you want webhook verification
+- `GITHUB_TOKEN` if GitHub PR ingestion is enabled
+- `GITHUB_WEBHOOK_SECRET` if webhook verification is enabled
 
-Render injects the backend connection string into `DATABASE_URL` and the frontend backend address into `BACKEND_HOSTPORT`.
+For local work outside Vercel, set `NEXT_PUBLIC_API_BASE_URL=http://localhost:8000` so the frontend can reach the backend service directly.

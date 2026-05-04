@@ -1,10 +1,16 @@
 # Architecture
 
-## MVP shape
+## Vercel service split
 
 ```text
-Streamlit UI -> FastAPI API -> Static analysis + OpenAI review -> SQLite/Postgres
+Next.js UI -> Vercel /api service -> FastAPI review API -> SQLite/Postgres
 ```
+
+## Frontend
+
+- Next.js App Router
+- Client-side workbench for analysis, history, and settings
+- Calls the backend through `/api/*` in production
 
 ## Backend modules
 
@@ -12,7 +18,7 @@ Streamlit UI -> FastAPI API -> Static analysis + OpenAI review -> SQLite/Postgre
 - `routes/analyze.py`: review endpoint
 - `routes/github.py`: GitHub webhook endpoint
 - `routes/history.py`: saved analysis retrieval
-- `services/static_analysis.py`: deterministic Python checks
+- `services/static_analysis.py`: deterministic checks
 - `services/llm.py`: optional OpenAI review
 - `services/persistence.py`: analysis and finding storage
 
@@ -20,8 +26,8 @@ Streamlit UI -> FastAPI API -> Static analysis + OpenAI review -> SQLite/Postgre
 
 This MVP intentionally excludes:
 
-- GitHub webhook automation
 - VS Code extension runtime integration
 - RAG/embeddings
 - billing
 - team accounts
+- multi-model routing

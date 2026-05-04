@@ -2,12 +2,11 @@
 
 ## Current contract
 
-Backend is the source of truth. Frontend must follow `POST /analyze`.
+The frontend is a client UI that speaks to the FastAPI backend over `GET /health`, `POST /analyze`, and the history endpoints.
 
-## Next recommended increments
+## Recommended order
 
-1. Add tests for static analysis and API routes
-2. Add PostgreSQL support for deployment
-3. Add auth and per-user history
-4. Add GitHub PR review flow
-5. Revisit VS Code extension after the API is stable
+1. Run the backend locally on port 8000
+2. Run the frontend locally with `NEXT_PUBLIC_API_BASE_URL=http://localhost:8000`
+3. Verify analysis, history, and webhook behavior
+4. Deploy through Vercel Services

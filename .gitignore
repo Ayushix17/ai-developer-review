@@ -7,8 +7,11 @@ __pycache__/
 .ruff_cache/
 .DS_Store
 .env
+.env.local
 backend/.env
+frontend/.env.local
 frontend/.streamlit/secrets.toml
+frontend/.next/
 node_modules/
 dist/
 .vscode-test/
